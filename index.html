@@ -13,7 +13,7 @@
     </style>
 </head>
 
-<body class="bg-dark">
+<body class="bg-dark" onload="getAllResults('movie')">
 
     <!-- Header section - Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow-lg"
@@ -26,16 +26,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Home</a>
+                        <a class="nav-link" href="#home" onclick="getAllResults('movie')">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Movies</a>
+                        <a class="nav-link" onclick="getAllResults('movie')" style="cursor: pointer;">Movies</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">TV Series</a>
+                        <a class="nav-link" onclick="getAllResults('series')" style="cursor: pointer;">TV Series</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="#about">About</a>
                     </li>
                 </ul>
             </div>
@@ -44,16 +44,16 @@
     <!-- Header end -->
 
     <!-- Search section -->
-    <div class="bg-black text-white py-5">
+    <div class="bg-black text-white py-5" id="home">
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
                     <h1 class="display-4 fw-bold mb-3">Find Your Favorite Movies</h1>
                     <p class="lead mb-4">Search from millions of movies and TV shows</p>
                     <div class="input-group input-group-lg mb-3">
-                        <input type="text" class="form-control" placeholder="Search for movies, TV shows..."
+                        <input type="text" class="form-control" id="txtSearch" placeholder="Search for movies, TV shows..."
                             aria-label="Search">
-                        <button class="btn btn-danger px-4" type="button">Search</button>
+                        <button class="btn btn-danger px-4" type="button" onclick="searchMovie()">Search</button>
                     </div>
                 </div>
             </div>
@@ -62,12 +62,14 @@
     <!-- Search section end -->
 
     <!-- Contents -->
-    <div class="container py-5 mt-5">
-        <!-- Movie result card -->
-        <h5 class="text-white mb-4">Search Results</h5>
-
+    <div class="container-fluid py-5">
         <div class="row">
-            <div class="col-12 mb-4">
+            <!-- Movie result card -->
+
+            <div class="col-12 mb-4 d-none" id="resultContainer">
+                <div class="col-12">
+                    <h2 class="text-white mb-4">Search Results</h2>
+                </div>
                 <div class="card bg-dark text-white shadow-lg">
                     <div class="row g-0">
                         <div class="col-md-3">
@@ -94,7 +96,8 @@
                                     <p class="mb-1"><strong>Language:</strong> English</p>
                                     <p class="mb-1"><strong>Country:</strong> United States</p>
                                     <p class="mb-1"><strong>Seasons:</strong> 1</p>
-                                    <p class="mb-0"><strong>Ratings:</strong> <i class="bi bi-star-fill text-warning"></i> 8.5/10</p>
+                                    <p class="mb-0"><strong>Ratings:</strong> <i
+                                            class="bi bi-star-fill text-warning"></i> 8.5/10</p>
                                 </div>
                                 <div class="d-flex gap-2">
                                     <button class="btn btn-danger">Watch Trailer</button>
@@ -108,58 +111,26 @@
             </div>
             <!-- Movie result card end -->
 
-            <!-- Additional movie cards -->
 
-            <h5 class="text-white mb-4 mt-5">Suggested movies by "Horror"</h5>
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card bg-dark text-white h-100 shadow-lg">
-                    <img src="https://m.media-amazon.com/images/M/MV5BZWE0ZWM1MjUtNmYzYS00NzU3LTkxYmQtNmI3NTc0ZTY1NmVlXkEyXkFqcGc@._V1_SX300.jpg"
-                        class="card-img-top" alt="Movie Poster">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">IT: Welcome to Derry</h5>
-                        <div class="mb-2">
-                            <span class="badge bg-danger me-1">PG-13</span>
-                            <span class="badge bg-secondary">2025</span>
-                        </div>
-                        <p class="card-text text-muted small">Action, Adventure, Sci-Fi</p>
-                        <p class="card-text">It will follow the events in 1962, the time leading up to the events of
-                            the first film based in 1989 of the Stephen King "It" series.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <small class="text-warning"><i class="bi bi-star-fill text-warning"></i> 8.5/10</small>
-                            <button class="btn btn-sm btn-outline-light">View Details</button>
-                        </div>
-                    </div>
+            <div class="col-12" id="mainContainer">
+                <!-- Additional movie cards -->
+                <div class="col-12">
+                    <h2 class="text-white mb-4" id="listHeader">Latest Movies</h2>
                 </div>
-            </div>
 
-            <h5 class="text-white mb-4 mt-5">Suggested TV Shows by "Horror"</h5>
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card bg-dark text-white h-100 shadow-lg">
-                    <img src="https://m.media-amazon.com/images/M/MV5BZWE0ZWM1MjUtNmYzYS00NzU3LTkxYmQtNmI3NTc0ZTY1NmVlXkEyXkFqcGc@._V1_SX300.jpg"
-                        class="card-img-top" alt="Movie Poster">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">IT: Welcome to Derry</h5>
-                        <div class="mb-2">
-                            <span class="badge bg-danger me-1">PG-13</span>
-                            <span class="badge bg-secondary">2025</span>
-                        </div>
-                        <p class="card-text text-muted small">Action, Adventure, Sci-Fi</p>
-                        <p class="card-text">It will follow the events in 1962, the time leading up to the events of
-                            the first film based in 1989 of the Stephen King "It" series.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <small class="text-warning"><i class="bi bi-star-fill text-warning"></i> 8.5/10</small>
-                            <button class="btn btn-sm btn-outline-light">View Details</button>
-                        </div>
-                    </div>
-                </div>
+                <!-- Results -->
+                <div class="row" id="dataContainer"></div>
+                <!-- Results end -->
+
             </div>
+            <!-- Additional movie cards end -->
+
         </div>
     </div>
-    <!-- Additional movie cards end -->
     <!-- Contents end -->
 
     <!-- About Section -->
-    <section class="bg-black text-white py-5 shadow-lg">
+    <section class="bg-black text-white py-5 shadow-lg" id="about">
         <div class="container">
             <div class="row justify-content-center align-items-center">
                 <div class="col-lg-8 mb-4 mb-lg-0">
@@ -191,6 +162,7 @@
     <!-- Footer end -->
 
     <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 
 </html>
