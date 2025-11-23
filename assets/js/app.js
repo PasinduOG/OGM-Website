@@ -3,11 +3,12 @@ let listHeader = document.getElementById("listHeader");
 let search = document.getElementById("txtSearch").value;
 let resultContainer = document.getElementById("resultContainer");
 
+const defaultImage = 'assets/img/default.jpg';
 const API_KEY = "f60eb7d2";
 
 function getAllResults(type) {
+    resultContainer.innerHTML = "";
     dataContainer.innerHTML = "";
-    resultContainer.classList.add("d-none");
 
     if (type == "movie") {
         listHeader.innerText = "Latest Movies"
@@ -53,10 +54,10 @@ function getAllResults(type) {
     }
 }
 
-function getSuggestResults(keyword) {
+function getSuggestResults(keyword, type) {
     dataContainer.innerHTML = "";
 
-    fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&y=2025&s=${keyword}`)
+    fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&y=2025&s=${keyword}&type=${type}`)
         .then(res => res.json())
         .then(data => {
 
@@ -65,7 +66,14 @@ function getSuggestResults(keyword) {
                 return;
             }
 
-            listHeader.innerText = `Suggested from "${keyword}"`;
+            let suggestType;
+            if (type == "movie") {
+                suggestType = "Movies";
+            } else {
+                suggestType = "TV Series";
+            }
+
+            listHeader.innerText = `Suggested ${suggestType} from "${keyword}"`;
 
             const defaultImage = 'assets/img/default.jpg';
             const results = data.Search;
@@ -104,7 +112,6 @@ function getSuggestResults(keyword) {
 function searchMovie() {
 
     dataContainer.innerHTML = "";
-    resultContainer.classList.remove("d-none");
 
     let search = document.getElementById("txtSearch").value.trim();
 
@@ -129,106 +136,32 @@ function searchMovie() {
             resultContainer.classList.remove("d-none");
 
             resultContainer.innerHTML = `
-            <div class="card bg-dark text-white shadow-lg">
-                <div class="row g-0">
-                    <div class="col-md-3">
-                        <img src="${result.Poster}"
-                            class="img-fluid rounded-start w-100 h-100" style="object-fit: cover;">
-                    </div>
-                    <div class="col-md-9">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h3 class="card-title mb-0 fw-bold">${result.Title}</h3>
-                                <span class="badge bg-danger">${result.Rated}</span>
+            <div class="card bg-dark text-white py-5 shadow-lg">
+                    <div class="container py-4">
+                        <div class="row align-items-center">
+                            <div class="col-lg-3 col-md-4 mb-4 mb-md-0">
+                                <img src="${result.Poster!= "N/A" ? result.Poster : defaultImage}"
+                                    alt="Movie Poster" class="img-fluid rounded shadow-lg">
                             </div>
-                            <p class="text-muted mb-3">
-                                <span class="me-3 text-light">Release: <span class="fw-bold">${result.Year}</span></span>
-                                <span class="me-3 text-light">Category: <span class="fw-bold">${result.Genre}</span></span>
-                                <span class="badge bg-secondary">${result.Type}</span>
-                            </p>
-                            <p class="card-text">${result.Plot}</p>
-                            <div class="mb-3">
-                                <p class="mb-1"><strong>Starring:</strong> ${result.Actors}</p>
-                                <p class="mb-1"><strong>Language:</strong> ${result.Language}</p>
-                                <p class="mb-1"><strong>Country:</strong> ${result.Country}</p>
-                                <p class="mb-0"><strong>Ratings:</strong> <i class="bi bi-star-fill text-warning"></i> ${result.imdbRating}/10</p>
+                            <div class="col-lg-9 col-md-8">
+                                <div class="d-flex align-items-center mb-3 flex-wrap">
+                                    <h2 class="h2 mb-0 me-3">${result.Title}</h2>
+                                    <span class="badge bg-danger">${result.Rated}</span>
+                                </div>
+                                <p class="text-secondary mb-3">
+                                    <span class="fw-bold text-white">Release:</span> ${result.Year} |
+                                    <span class="fw-bold text-white">Category:</span> <span
+                                        class="text-danger fw-semibold">${result.Genre}</span>
+                                </p>
+                                <p class="mb-4">${result.Plot}</p>
+                                <button class="btn btn-danger px-4">View more</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         `;
             let genre = result.Genre.split(",");
             console.log(genre[0]);
-            getSuggestResults(genre[0]);
+            getSuggestResults(genre[0], result.Type);
         });
 }
-
-
-// function searchMovie() {
-
-//     dataContainer.innerHTML = "";
-
-//     if (search === "") {
-//         getAllResults("movie");
-//         return;
-//     }
-
-//     fetch(`https://www.omdbapi.com/?apikey=f60eb7d2&t=${search}`)
-//         .then(res => res.json())
-//         .then(result => {
-
-//             // If movie not found
-//             if (result.Response === "False") {
-//                 resultContainer.classList.remove("d-none");
-//                 resultContainer.innerHTML = `
-//                     <div class="alert alert-danger">No results found.</div>
-//                 `;
-//                 return;
-//             }
-
-//             resultContainer.classList.remove("d-none");
-
-//             resultContainer.innerHTML = `
-//             <div class="card bg-dark text-white shadow-lg">
-//                     <div class="row g-0">
-//                         <div class="col-md-3">
-//                             <img src="${result.Poster}"
-//                                 class="img-fluid rounded-start w-100 h-100" style="object-fit: cover;"
-//                                 alt="IT: Welcome to Derry">
-//                         </div>
-//                         <div class="col-md-9">
-//                             <div class="card-body">
-//                                 <div class="d-flex justify-content-between align-items-start mb-2">
-//                                     <h3 class="card-title mb-0 fw-bold">IT: Welcome to Derry</h3>
-//                                     <span class="badge bg-danger">TV-MA</span>
-//                                 </div>
-//                                 <p class="text-muted mb-3">
-//                                     <span class="me-3 text-light">Release: <span class="fw-bold">2025-</span></span>
-//                                     <span class="me-3 text-light">Category: <span class="fw-bold">Horror</span></span>
-//                                     <span class="badge bg-secondary">TV Series</span>
-//                                 </p>
-//                                 <p class="card-text">It will follow the events in 1962, the time leading up to the
-//                                     events of the first film based in 1989 of the Stephen King "It" series.</p>
-//                                 <div class="mb-3">
-//                                     <p class="mb-1"><strong>Starring:</strong> Bill Skarsgård, Taylour Paige, James
-//                                         Remar</p>
-//                                     <p class="mb-1"><strong>Language:</strong> English</p>
-//                                     <p class="mb-1"><strong>Country:</strong> United States</p>
-//                                     <p class="mb-1"><strong>Seasons:</strong> 1</p>
-//                                     <p class="mb-0"><strong>Ratings:</strong> <i class="bi bi-star-fill text-warning"></i> 8.5/10</p>
-//                                 </div>
-//                                 <div class="d-flex gap-2">
-//                                     <button class="btn btn-danger">Watch Trailer</button>
-//                                     <button class="btn btn-light">More Info</button>
-//                                     <button class="btn btn-light">Add to Watchlist</button>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//         `;
-
-//         });
-
-// }

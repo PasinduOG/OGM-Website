@@ -13,7 +13,7 @@
     </style>
 </head>
 
-<body class="bg-dark" onload="getAllResults('movie')">
+<body class="bg-black" onload="getAllResults('movie')">
 
     <!-- Header section - Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow-lg"
@@ -51,8 +51,8 @@
                     <h1 class="display-4 fw-bold mb-3">Find Your Favorite Movies</h1>
                     <p class="lead mb-4">Search from millions of movies and TV shows</p>
                     <div class="input-group input-group-lg mb-3">
-                        <input type="text" class="form-control" id="txtSearch" placeholder="Search for movies, TV shows..."
-                            aria-label="Search">
+                        <input type="text" class="form-control" id="txtSearch"
+                            placeholder="Search for movies, TV shows..." aria-label="Search">
                         <button class="btn btn-danger px-4" type="button" onclick="searchMovie()">Search</button>
                     </div>
                 </div>
@@ -64,51 +64,9 @@
     <!-- Contents -->
     <div class="container-fluid py-5">
         <div class="row">
-            <!-- Movie result card -->
 
-            <div class="col-12 mb-4 d-none" id="resultContainer">
-                <div class="col-12">
-                    <h2 class="text-white mb-4">Search Results</h2>
-                </div>
-                <div class="card bg-dark text-white shadow-lg">
-                    <div class="row g-0">
-                        <div class="col-md-3">
-                            <img src="https://m.media-amazon.com/images/M/MV5BZWE0ZWM1MjUtNmYzYS00NzU3LTkxYmQtNmI3NTc0ZTY1NmVlXkEyXkFqcGc@._V1_SX300.jpg"
-                                class="img-fluid rounded-start w-100 h-100" style="object-fit: cover;"
-                                alt="IT: Welcome to Derry">
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <h3 class="card-title mb-0 fw-bold">IT: Welcome to Derry</h3>
-                                    <span class="badge bg-danger">TV-MA</span>
-                                </div>
-                                <p class="text-muted mb-3">
-                                    <span class="me-3 text-light">Release: <span class="fw-bold">2025-</span></span>
-                                    <span class="me-3 text-light">Category: <span class="fw-bold">Horror</span></span>
-                                    <span class="badge bg-secondary">TV Series</span>
-                                </p>
-                                <p class="card-text">It will follow the events in 1962, the time leading up to the
-                                    events of the first film based in 1989 of the Stephen King "It" series.</p>
-                                <div class="mb-3">
-                                    <p class="mb-1"><strong>Starring:</strong> Bill Skarsgård, Taylour Paige, James
-                                        Remar</p>
-                                    <p class="mb-1"><strong>Language:</strong> English</p>
-                                    <p class="mb-1"><strong>Country:</strong> United States</p>
-                                    <p class="mb-1"><strong>Seasons:</strong> 1</p>
-                                    <p class="mb-0"><strong>Ratings:</strong> <i
-                                            class="bi bi-star-fill text-warning"></i> 8.5/10</p>
-                                </div>
-                                <div class="d-flex gap-2">
-                                    <button class="btn btn-danger">Watch Trailer</button>
-                                    <button class="btn btn-light">More Info</button>
-                                    <button class="btn btn-light">Add to Watchlist</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Movie result card -->
+            <div class="col-12 mb-4" id="resultContainer"></div>
             <!-- Movie result card end -->
 
 
