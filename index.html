@@ -26,7 +26,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#home" onclick="getAllResults('movie')">Home</a>
+                        <a class="nav-link" href="#searchSection" onclick="getAllResults('movie')">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" onclick="getAllResults('movie')" style="cursor: pointer;">Movies</a>
@@ -44,7 +44,7 @@
     <!-- Header end -->
 
     <!-- Search section -->
-    <div class="bg-black text-white py-5" id="home">
+    <div class="bg-black text-white py-5" id="searchSection">
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
@@ -72,8 +72,25 @@
 
             <div class="col-12" id="mainContainer">
                 <!-- Additional movie cards -->
-                <div class="col-12">
-                    <h2 class="text-white mb-4" id="listHeader">Latest Movies</h2>
+                <div class="row px-3">
+                    <div class="col-8">
+                        <h2 class="text-white mb-4" id="listHeader">Latest Movies</h2>
+                    </div>
+                    <div class="col-4 d-flex justify-content-end">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="sortDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Sort by
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end bg-secondary" aria-labelledby="sortDropdown">
+                                <li><a class="dropdown-item text-light" href="#">Latest</a></li>
+                                <li><a class="dropdown-item text-light" href="#">Popularity</a></li>
+                                <li><a class="dropdown-item text-light" href="#">Rating</a></li>
+                                <li><a class="dropdown-item text-light" href="#">Title (A-Z)</a></li>
+                                <li><a class="dropdown-item text-light" href="#">Release Date</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Results -->
@@ -119,6 +136,7 @@
     </footer>
     <!-- Footer end -->
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/app.js"></script>
 </body>
