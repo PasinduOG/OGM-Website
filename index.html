@@ -6,12 +6,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to OGM</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+    </style>
 </head>
 
-<body>
-    
+<body class="bg-black" onload="getAllResults('movie')">
+
+    <!-- Header section - Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black shadow-lg"
+        style="width: 100%; position: fixed; z-index: 5;">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="#">OGM <span class="text-secondary">THE MOVIE WORLD</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#searchSection" onclick="getAllResults('movie')">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="getAllResults('movie')" style="cursor: pointer;">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="getAllResults('series')" style="cursor: pointer;">TV Series</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Header end -->
+
+    <!-- Search section -->
+    <div class="bg-black text-white py-5" id="searchSection">
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h1 class="display-4 fw-bold mb-3">Find Your Favorite Movies</h1>
+                    <p class="lead mb-4">Search from millions of movies and TV shows</p>
+                    <div class="input-group input-group-lg mb-3">
+                        <input type="text" class="form-control" id="txtSearch"
+                            placeholder="Search for movies, TV shows..." aria-label="Search">
+                        <button class="btn btn-danger px-4" type="button" onclick="searchMovie()">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Search section end -->
+
+    <!-- Contents -->
+    <div class="container-fluid py-5">
+        <div class="row">
+
+            <!-- Movie result card -->
+            <div class="col-12 mb-4" id="resultContainer"></div>
+            <!-- Movie result card end -->
+
+
+            <div class="col-12" id="mainContainer">
+                <!-- Additional movie cards -->
+                <div class="row px-3">
+                    <div class="col-8">
+                        <h2 class="text-white mb-4" id="listHeader">Latest Movies</h2>
+                    </div>
+                    <div class="col-4 d-flex justify-content-end">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="sortDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Sort by
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end bg-secondary" aria-labelledby="sortDropdown">
+                                <li><a class="dropdown-item text-light" href="#">Latest</a></li>
+                                <li><a class="dropdown-item text-light" href="#">Popularity</a></li>
+                                <li><a class="dropdown-item text-light" href="#">Rating</a></li>
+                                <li><a class="dropdown-item text-light" href="#">Title (A-Z)</a></li>
+                                <li><a class="dropdown-item text-light" href="#">Release Date</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="row" id="dataContainer"></div>
+                <!-- Results end -->
+
+            </div>
+            <!-- Additional movie cards end -->
+
+        </div>
+    </div>
+    <!-- Contents end -->
+
+    <!-- About Section -->
+    <section class="bg-black text-white py-5 shadow-lg" id="about">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <h2 class="display-5 fw-bold mb-4">About OGM</h2>
+                    <p class="lead mb-3">Your ultimate destination for discovering movies and TV shows from around the
+                        world.</p>
+                    <p class="text-light mb-3">OGM is a modern and powerful platform designed to help you instantly
+                        search and explore thousands of movies and TV series from around the world. Whether you're
+                        looking for trending titles, classic films, or newly released shows, OGM makes it fast and
+                        effortless to find what you love.</p>
+                    <p class="text-light mb-4">Our mission is to provide a clean, simple, and enjoyable experience for
+                        every user — from casual viewers to hardcore cinephiles. With accurate information, easy
+                        navigation, and smart search features, OGM helps you discover the perfect movie or series every
+                        time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Section end -->
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-4 shadow-lg">
+        <div class="container">
+            <div class="text-center text-light small">
+                <p class="mb-0">&copy; 2025 OGM. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer end -->
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 
 </html>
